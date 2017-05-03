@@ -424,6 +424,17 @@ NS_INLINE void MPFreeHTMLRenderer(hoedown_renderer *htmlRenderer)
 {
     id<MPRendererDelegate> d = self.delegate;
     NSMutableArray *scripts = [NSMutableArray array];
+    
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"webfont", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"snap.svg-min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"underscore-min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"sequence-diagram-min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"raphael.min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"flowchart.min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"jquery-3.2.1.min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"jquery-plugin", @"js")]];
+   
+    
     if (self.rendererFlags & HOEDOWN_HTML_USE_TASK_LIST)
     {
         NSURL *url = MPExtensionURL(@"tasklist", @"js");
@@ -433,6 +444,9 @@ NS_INLINE void MPFreeHTMLRenderer(hoedown_renderer *htmlRenderer)
         [scripts addObjectsFromArray:self.prismScripts];
     if ([d rendererHasMathJax:self])
         [scripts addObjectsFromArray:self.mathjaxScripts];
+    
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"my-action", @"js")]];
+    
     return scripts;
 }
 
@@ -578,6 +592,20 @@ NS_INLINE void MPFreeHTMLRenderer(hoedown_renderer *htmlRenderer)
         [scripts addObjectsFromArray:self.mathjaxScripts];
     }
 
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"webfont", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"snap.svg-min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"underscore-min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"sequence-diagram-min", @"js")]];
+    
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"raphael.min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"flowchart.min", @"js")]];
+    
+    
+    
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"jquery-3.2.1.min", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"jquery-plugin", @"js")]];
+    [scripts addObject:[MPScript javaScriptWithURL:MPExtensionURL(@"my-action", @"js")]];
+    
     NSString *title = [self.dataSource rendererHTMLTitle:self];
     if (!title)
         title = @"";
